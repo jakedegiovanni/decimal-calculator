@@ -4,7 +4,7 @@ module Hex
     ) where
 
 import OperatingTypes (OperatingMode(..))
-import Binary (fromBinary)
+import Decimal (fromDecimal)
 import Data.Char (toUpper)
 import qualified Data.List as List
 import qualified Data.Text as Text
@@ -19,7 +19,7 @@ fromHex HEXADECIMAL HEXADECIMAL inputValue = inputValue
 fromHex _ _ _ = "what?"
 
 hexToBinary :: String -> String
-hexToBinary inputValue = fromBinary DECIMAL BINARY $ hexToDecimal inputValue
+hexToBinary inputValue = fromDecimal DECIMAL BINARY $ hexToDecimal inputValue
 
 hexToRgb :: String -> String
 hexToRgb inputValue = do

@@ -1,14 +1,14 @@
-module Binary 
+module Decimal 
     (
-        fromBinary
+        fromDecimal
     ) where
 
 import OperatingTypes (OperatingMode(..))
 import qualified Data.List as List
 
-fromBinary :: OperatingMode -> OperatingMode -> String -> String
-fromBinary DECIMAL BINARY inputValue = decimalToBinary inputValue
-fromBinary _ _ _ = "todo"
+fromDecimal :: OperatingMode -> OperatingMode -> String -> String
+fromDecimal DECIMAL BINARY inputValue = decimalToBinary inputValue
+fromDecimal _ _ _ = "todo"
 
 decimalToBinary :: String -> String
 decimalToBinary inputValue = do
