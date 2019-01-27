@@ -15,11 +15,10 @@ fromHex _ _ _ = "what?"
 
 hexToDecimal :: String -> String
 hexToDecimal inputValue = do
-    let hexArray = map (\x -> List.elemIndex x hexList) inputValue
     let decimalValue = convertToDecimal (map toUpper inputValue) ((length inputValue) - 1)
     letsPrint decimalValue
 
--- testing :: [Maybe Int] -> Int -> Maybe Int 
+convertToDecimal :: [Char] -> Int -> Maybe Int 
 convertToDecimal (x:xs) 0 = do
     z <- List.elemIndex x hexList
     let e = z * (16 ^ 0)
