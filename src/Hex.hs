@@ -4,6 +4,7 @@ module Hex
     ) where
 
 import OperatingTypes (OperatingMode(..))
+import Binary (fromBinary)
 import Data.Char (toUpper)
 import qualified Data.List as List
 import qualified Data.Text as Text
@@ -13,7 +14,12 @@ hexList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
 fromHex :: OperatingMode -> OperatingMode -> String -> String
 fromHex HEXADECIMAL DECIMAL inputValue = hexToDecimal inputValue
 fromHex HEXADECIMAL RGB inputValue = hexToRgb inputValue
+fromHex HEXADECIMAL BINARY inputValue = hexToBinary inputValue
+fromHex HEXADECIMAL HEXADECIMAL inputValue = inputValue
 fromHex _ _ _ = "what?"
+
+hexToBinary :: String -> String
+hexToBinary inputValue = fromBinary DECIMAL BINARY $ hexToDecimal inputValue
 
 hexToRgb :: String -> String
 hexToRgb inputValue = do
