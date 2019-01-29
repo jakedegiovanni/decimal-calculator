@@ -6,7 +6,6 @@ module Decimal
 import OperatingTypes (OperatingMode(..))
 import Binary (fromBinary)
 
--- TODO: make this use instance as it is identical
 fromDecimal :: OperatingMode -> OperatingMode -> String -> String
 fromDecimal DECIMAL BINARY inputValue = decimalToBinary inputValue
 fromDecimal DECIMAL RGB _ = "doesn't make sense"
