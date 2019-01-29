@@ -5,7 +5,6 @@ module Decimal
 
 import OperatingTypes (OperatingMode(..))
 import Binary (fromBinary)
-import qualified Data.List as List
 
 -- TODO: make this use instance as it is identical
 fromDecimal :: OperatingMode -> OperatingMode -> String -> String
@@ -21,7 +20,7 @@ decimalToHexadecimal inputValue = fromBinary BINARY HEXADECIMAL $ decimalToBinar
 decimalToBinary :: String -> String
 decimalToBinary inputValue = do
     let number = read inputValue :: Int
-    List.intercalate "" $ map (\x -> show x) $ reverse $ convertToReversedBinary number
+    foldl (++) "" $ map (\x -> show x) $ reverse $ convertToReversedBinary number
 
 convertToReversedBinary :: Int -> [Int]
 convertToReversedBinary 0 = []
