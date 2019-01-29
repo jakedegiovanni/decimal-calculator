@@ -4,11 +4,19 @@ module Decimal
     ) where
 
 import OperatingTypes (OperatingMode(..))
+import Binary (fromBinary)
 import qualified Data.List as List
 
+-- TODO: make this use instance as it is identical
 fromDecimal :: OperatingMode -> OperatingMode -> String -> String
 fromDecimal DECIMAL BINARY inputValue = decimalToBinary inputValue
-fromDecimal _ _ _ = "todo"
+fromDecimal DECIMAL RGB _ = "doesn't make sense"
+fromDecimal DECIMAL DECIMAL inputValue = inputValue
+fromDecimal DECIMAL HEXADECIMAL inputValue = decimalToHexadecimal inputValue
+fromDecimal _ _ _ = "what?"
+
+decimalToHexadecimal :: String -> String
+decimalToHexadecimal inputValue = fromBinary BINARY HEXADECIMAL $ decimalToBinary inputValue
 
 decimalToBinary :: String -> String
 decimalToBinary inputValue = do

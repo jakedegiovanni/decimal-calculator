@@ -9,6 +9,7 @@ import qualified Data.List as List
 import qualified System.Exit as SExit
 import qualified Hex as Hex
 import qualified Decimal as Decimal
+import qualified Binary as Binary
 
 calculator :: IO ()
 calculator = do
@@ -33,6 +34,7 @@ convertInput inputType outputType = do
 doConversion :: OperatingMode -> OperatingMode -> String -> IO ()
 doConversion HEXADECIMAL x inputValue = putStrLn $ Hex.fromHex HEXADECIMAL x inputValue
 doConversion DECIMAL x inputValue = putStrLn $ Decimal.fromDecimal DECIMAL x inputValue
+doConversion BINARY x inputValue = putStrLn $ Binary.fromBinary BINARY x inputValue
 doConversion _ _ _ = putStrLn "another"
 
 getOperatingMode:: String -> IO String

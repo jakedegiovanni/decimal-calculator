@@ -1,15 +1,12 @@
 module Hex
-    (
-        fromHex
+    ( fromHex
     ) where
 
-import OperatingTypes (OperatingMode(..))
+import OperatingTypes (OperatingMode(..), hexList)
 import Decimal (fromDecimal)
 import Data.Char (toUpper)
 import qualified Data.List as List
 import qualified Data.Text as Text
-
-hexList = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F']
 
 fromHex :: OperatingMode -> OperatingMode -> String -> String
 fromHex HEXADECIMAL DECIMAL inputValue = hexToDecimal inputValue
