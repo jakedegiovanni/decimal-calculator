@@ -7,25 +7,25 @@ import OperatingTypes (OperatingMode(..), hexList)
 import qualified Data.Text as Text
 import qualified Data.List as List
 
-fromBinary :: OperatingMode -> OperatingMode -> String -> String
+fromBinary :: OperatingMode -> OperatingMode -> Text.Text -> Text.Text
 fromBinary BINARY HEXADECIMAL inputValue = binaryToHex inputValue
-fromBinary BINARY DECIMAL inputValue = show $ binaryToDecimal inputValue
+fromBinary BINARY DECIMAL inputValue = Text.pack $ show $ binaryToDecimal inputValue
 fromBinary BINARY BINARY inputValue = inputValue
-fromBinary BINARY RGB _ = "no"
-fromBinary _ _ _ = "what?"
+fromBinary BINARY RGB _ = Text.pack "no"
+fromBinary _ _ _ = Text.pack "what?"
 
-binaryToHex :: String -> String
-binaryToHex inputValue = foldr (:) [] $ map (\x -> hexList!!x) $ map binaryToDecimal $ map Text.unpack $ Text.chunksOf 4 $ Text.pack $ padToMultiplesOf4 inputValue
+binaryToHex :: Text.Text -> Text.Text
+binaryToHex inputValue = Text.pack $ foldr (:) [] $ map (\x -> hexList!!x) $ map binaryToDecimal $ Text.chunksOf 4 $ padToMultiplesOf4 inputValue
 
-padToMultiplesOf4 :: String -> String
+padToMultiplesOf4 :: Text.Text -> Text.Text
 padToMultiplesOf4 inputValue = do
-    let len = length inputValue
+    let len = Text.length inputValue
     let paddingAmmount = [x | x <- [len..(len * 4)], (mod x 4) == 0]
     let zeroPadding = replicate (paddingAmmount!!0 - len) '0'
-    zeroPadding ++ inputValue
+    Text.append (Text.pack zeroPadding) inputValue
 
-binaryToDecimal :: String -> Int
-binaryToDecimal inputValue = addTwoPowers $ zip [0..] $ reverse inputValue
+binaryToDecimal :: Text.Text -> Int
+binaryToDecimal inputValue = addTwoPowers $ zip [0..] $ Text.unpack $ Text.reverse inputValue
 
 addTwoPowers :: [(Int, Char)] -> Int
 addTwoPowers [] = 0
