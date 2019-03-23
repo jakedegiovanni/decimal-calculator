@@ -34,9 +34,9 @@ convertInput inputType outputType = do
     doConversion inputType outputType $ Text.pack inputValue
 
 doConversion :: OperatingMode -> OperatingMode -> Text.Text -> IO ()
-doConversion HEXADECIMAL x inputValue = putStrLn $ Text.unpack $ Hex.fromHex HEXADECIMAL x inputValue
-doConversion DECIMAL x inputValue = putStrLn $ Text.unpack $ Decimal.fromDecimal DECIMAL x inputValue
-doConversion BINARY x inputValue = putStrLn $ Text.unpack $ Binary.fromBinary BINARY x inputValue
+doConversion HEXADECIMAL x inputValue = display $ Hex.fromHex HEXADECIMAL x inputValue
+doConversion DECIMAL x inputValue = display $ Decimal.fromDecimal DECIMAL x inputValue
+doConversion BINARY x inputValue = display $ Binary.fromBinary BINARY x inputValue
 doConversion _ _ _ = putStrLn "another"
 
 getOperatingMode:: String -> IO String
@@ -47,3 +47,6 @@ getOperatingMode mode =  do
 
 createFormattedString :: [String]
 createFormattedString = map (\x -> show x ++ ") " ++ (show $ getOperatingModeValue x)) [1..4]
+
+display :: Text.Text -> IO ()
+display x = putStrLn $ Text.unpack x
